@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar'; // Ensure Navbar component is properly defined
 import HomePage from './components/HomePage'; // Ensure HomePage component is properly defined
