@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/TingTongBingBong/static/css/main.e8b8557b.css",
-    "main.js": "/TingTongBingBong/static/js/main.b6f0381e.js",
-    "index.html": "/TingTongBingBong/index.html",
-    "main.e8b8557b.css.map": "/TingTongBingBong/static/css/main.e8b8557b.css.map",
-    "main.b6f0381e.js.map": "/TingTongBingBong/static/js/main.b6f0381e.js.map"
+    "main.css": "/static/css/main.e8b8557b.css",
+    "main.js": "/static/js/main.b6f0381e.js",
+    "index.html": "/index.html",
+    "main.e8b8557b.css.map": "/static/css/main.e8b8557b.css.map",
+    "main.b6f0381e.js.map": "/static/js/main.b6f0381e.js.map"
   },
   "entrypoints": [
     "static/css/main.e8b8557b.css",
