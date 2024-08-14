@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MarkdownEditor from './MarkdownEditor';
 
 const NoteSubPage = ({ title }) => {
