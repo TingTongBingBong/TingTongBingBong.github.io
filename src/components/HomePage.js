@@ -7,6 +7,9 @@ const HomePage = () => {
       <p>Start taking notes, editing, and collaborating on various topics.</p>
     </div>
   );
+  
 }
+
+
 
 export default HomePage;

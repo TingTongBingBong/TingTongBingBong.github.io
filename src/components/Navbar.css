@@ -30,11 +30,12 @@ nav ul li .dropdown {
   z-index: 1000; /* Ensure it overlays other content */
 }
 
+/* Show dropdown on hover of parent li */
 nav ul li:hover .dropdown {
-  display: block; /* Show the dropdown when hovering over the parent li */
+  display: block;
 }
 
-/* Styling the links in the dropdown */
+/* Ensure dropdown stays open when hovering over it or its links */
 nav ul li .dropdown li {
   margin: 0;
 }
@@ -42,6 +43,7 @@ nav ul li .dropdown li {
 nav ul li .dropdown li a {
   padding: 10px;
   color: white;
+  display: block;
 }
 
 nav ul li .dropdown li a:hover {
