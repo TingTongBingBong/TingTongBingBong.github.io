@@ -5,6 +5,10 @@ body {
   background-color: #f4f4f4;
 }
 
+.app-container {
+  padding: 20px;
+}
+
 nav {
   background-color: #333;
   color: white;
