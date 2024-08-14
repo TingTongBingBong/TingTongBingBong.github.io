@@ -1,22 +1,24 @@
-import React, { useRef } from 'react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom'; // Using HashRouter for compatibility with GitHub Pages
-import Navbar from './components/Navbar'; // Importing the Navbar component
-import HomePage from './components/HomePage'; // Importing the HomePage component
-import NotesPage from './components/NotesPage'; // Importing the NotesPage component
-import { SubPage1, SubPage2, SubPage3 } from './pages/SubPage1'; // Importing the note sub-pages
-import './App.css'; // Importing global styles
+import React from 'react';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar'; // Ensure Navbar component is properly defined
+import HomePage from './components/HomePage'; // Ensure HomePage component is properly defined
+import NotesPage from './components/NotesPage'; // Ensure NotesPage component is properly defined
+import SubPage1 from './pages/SubPage1'; // Ensure SubPage1 component is properly defined
+import SubPage2 from './pages/SubPage2'; // Ensure SubPage2 component is properly defined
+import SubPage3 from './pages/SubPage3'; // Ensure SubPage3 component is properly defined
+import './App.css'; // Global styles
 
 function App() {
   return (
     <Router>
-      <Navbar />  {/* Render the Navbar component at the top */}
+      <Navbar />
       <div className="app-container">
         <Routes>
-          <Route path="/" element={<HomePage />} />  {/* Home page route */}
-          <Route path="/notes" element={<NotesPage />} />  {/* Notes page route */}
-          <Route path="/notes/subpage1" element={<SubPage1 />} />  {/* SubPage1 route */}
-          <Route path="/notes/subpage2" element={<SubPage2 />} />  {/* SubPage2 route */}
-          <Route path="/notes/subpage3" element={<SubPage3 />} />  {/* SubPage3 route */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/notes" element={<NotesPage />} />
+          <Route path="/notes/subpage1" element={<SubPage1 />} />
+          <Route path="/notes/subpage2" element={<SubPage2 />} />
+          <Route path="/notes/subpage3" element={<SubPage3 />} />
         </Routes>
       </div>
     </Router>
