@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
 import NotesPage from './components/NotesPage';
 import { SubPage1, SubPage2, SubPage3 } from './pages/SubPage1';
+import './App.css';
 
 function App() {
   return (

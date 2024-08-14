@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Split from 'react-split';
 import ReactMarkdown from 'react-markdown';
-import './MarkdownEditor.css';  // Add some basic styling for split
+import './MarkdownEditor.css';
 
 const MarkdownEditor = () => {
   const [markdown, setMarkdown] = useState("");
