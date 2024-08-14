@@ -17,8 +17,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/notes" element={<NotesPage />} />
           <Route path="/notes/subpage1" element={<SubPage1 />} />
-          <Route path="/notes/subpage2" element={<SubPage2 />} />
-          <Route path="/notes/subpage3" element={<SubPage3 />} />
         </Routes>
       </div>
     </Router>

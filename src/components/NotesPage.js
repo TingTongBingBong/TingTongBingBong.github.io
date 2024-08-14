@@ -7,8 +7,6 @@ const NotesPage = () => {
       <h1>Notes Table of Contents</h1>
       <ul>
         <li><Link to="/notes/subpage1">SubPage 1</Link></li>
-        <li><Link to="/notes/subpage2">SubPage 2</Link></li>
-        <li><Link to="/notes/subpage3">SubPage 3</Link></li>
       </ul>
     </div>
   );
