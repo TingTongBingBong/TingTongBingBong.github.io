@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import MarkdownEditor from './MarkdownEditor';
 
 const NoteSubPage = ({ title }) => {
   const [editMode, setEditMode] = useState(false);
-  const editorRef = useRef(null); // Create a ref for the MarkdownEditor
+
 
   return (
     <div>
