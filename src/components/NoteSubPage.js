@@ -3,7 +3,7 @@ import MarkdownEditor from './MarkdownEditor';
 
 const NoteSubPage = ({ title }) => {
   const [editMode, setEditMode] = useState(false);
-  const editorRef = useRef(null); // Create the ref
+  const editorRef = useRef(null); // Create a ref for the MarkdownEditor
 
   return (
     <div>
@@ -11,9 +11,13 @@ const NoteSubPage = ({ title }) => {
       <button onClick={() => setEditMode(!editMode)}>
         {editMode ? "Publish" : "Edit"}
       </button>
-      {editMode ? <MarkdownEditor ref={editorRef} /> : <div>Your published content will appear here</div>}
+      {editMode ? (
+        <MarkdownEditor ref={editorRef} />
+      ) : (
+        <div>Your published content will appear here</div>
+      )}
     </div>
   );
-}
+};
 
 export default NoteSubPage;
