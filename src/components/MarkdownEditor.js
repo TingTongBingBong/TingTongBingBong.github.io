@@ -3,7 +3,7 @@ import Split from 'react-split';
 import ReactMarkdown from 'react-markdown';
 import './MarkdownEditor.css';
 
-const MarkdownEditor = (props) => {
+const MarkdownEditor = () => {
   const [markdown, setMarkdown] = useState("");
 
   return (
