@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'; // Using HashRouter for compatibility with GitHub Pages
 import Navbar from './components/Navbar'; // Importing the Navbar component
 import HomePage from './components/HomePage'; // Importing the HomePage component
