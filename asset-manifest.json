@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.e8b8557b.css",
-    "main.js": "/static/js/main.f77d7719.js",
-    "index.html": "/index.html",
-    "main.e8b8557b.css.map": "/static/css/main.e8b8557b.css.map",
-    "main.f77d7719.js.map": "/static/js/main.f77d7719.js.map"
+    "main.css": "/ttbbsite/static/css/main.e8b8557b.css",
+    "main.js": "/ttbbsite/static/js/main.ac1ca750.js",
+    "index.html": "/ttbbsite/index.html",
+    "main.e8b8557b.css.map": "/ttbbsite/static/css/main.e8b8557b.css.map",
+    "main.ac1ca750.js.map": "/ttbbsite/static/js/main.ac1ca750.js.map"
   },
   "entrypoints": [
     "static/css/main.e8b8557b.css",
-    "static/js/main.f77d7719.js"
+    "static/js/main.ac1ca750.js"
   ]
 }
