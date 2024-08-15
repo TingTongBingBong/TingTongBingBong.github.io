@@ -61,21 +61,8 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
         .split('\n')
         .map(line => line ? `${syntax}${line}${syntax}` : '') // Apply syntax to non-empty lines
         .join('\n');
-    } else if (numberedList) {
-      const lines = selectedText.split('\n');
-      let count = 1;
-
-      const isNewList = /(^|\n)\s*$/.test(beforeText) || /(^|\n)(?!\d+\.\s)/.test(beforeText);
-
-      newText = lines.map((line, index) => {
-        if (index === 0 && isNewList) {
-          count = 1; // Reset count if starting a new list
-        } else if (index > 0 && lines[index - 1].trim() === '') {
-          count = 1; // Reset count if a new list is started after a blank line within the selection
-        }
-        return `${count++}. ${line}`;
-      }).join('\n');
-    } else {
+    } 
+     else {
       newText = selectedText
         .split('\n')
         .map(line => `${syntax}${line}`)
@@ -133,7 +120,6 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
           <button onClick={() => addMarkdownSyntax('_', true)}>Italics</button>
           <button onClick={() => addMarkdownSyntax('# ', false)}>Heading</button>
           <button onClick={() => addMarkdownSyntax('* ', false)}>Bullet List</button>
-          <button onClick={() => addMarkdownSyntax('', false, true)}>Number List</button>
           <button onClick={() => addMarkdownSyntax('- [ ] ', false)}>Checklist</button>
           <button onClick={addLink}>Link</button> {/* Updated Link Button */}
         </div>
