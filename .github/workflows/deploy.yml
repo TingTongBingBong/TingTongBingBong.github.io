@@ -12,12 +12,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install Node.js, npm, and Firebase CLI
-      run: |
-        npm install -g firebase-tools
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'  # Use the version of Node.js your project requires
+
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools
 
     - name: Deploy to Firebase
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
       run: |
-        firebase deploy --only hosting --project <ttbbsite>
+        echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > "${HOME}/firebase_key.json"
+        firebase use --add --token "$(firebase login:ci --no-localhost --brief --account=${{ secrets.FIREBASE_SERVICE_ACCOUNT }})"
+        firebase deploy --only hosting --project <your-firebase-project-id> --token "$(firebase login:ci --no-localhost --brief --account=${{ secrets.FIREBASE_SERVICE_ACCOUNT }})"
