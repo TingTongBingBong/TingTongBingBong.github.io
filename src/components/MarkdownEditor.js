@@ -1,6 +1,7 @@
 import React, { useState, useEffect, forwardRef } from 'react';
 import Split from 'react-split';
 import ReactMarkdown from 'react-markdown';
+import { db } from '../firebaseConfig'; // Import Firebase configuration
 import './MarkdownEditor.css';
 
 const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly = false }, ref) => {
@@ -15,6 +16,31 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
       setHistoryIndex(0);
     }
   }, [content]);
+
+  useEffect(() => {
+    // Load notes from Firebase Firestore
+    const unsubscribe = db.collection('notes').doc('noteId')
+      .onSnapshot((doc) => {
+        if (doc.exists) {
+          setMarkdown(doc.data().content);
+          setHistory([doc.data().content]);
+          setHistoryIndex(0);
+        }
+      });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    // Save notes to Firebase Firestore
+    const saveToFirestore = async () => {
+      await db.collection('notes').doc('noteId').set({
+        content: markdown
+      });
+    };
+
+    saveToFirestore();
+  }, [markdown]);
 
   // Function to handle input changes and update history
   const handleInputChange = (e) => {
@@ -62,7 +88,7 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
         .map(line => line ? `${syntax}${line}${syntax}` : '') // Apply syntax to non-empty lines
         .join('\n');
     } 
-     else {
+    else {
       newText = selectedText
         .split('\n')
         .map(line => `${syntax}${line}`)
@@ -108,10 +134,6 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
     }, 0);
   };
 
-  const processMarkdownWithLineBreaks = (text) => {
-    return text.replace(/\n/g, '  \n'); // Adds two spaces at the end of each line
-  };
-
   return (
     <div className="markdown-editor" onKeyDown={handleKeyDown}>
       {!readOnly && (
@@ -134,12 +156,12 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
             style={{ height: "100%", width: "100%", resize: "none" }}
           />
           <div className="markdown-preview">
-            <ReactMarkdown breaks>{processMarkdownWithLineBreaks(markdown)}</ReactMarkdown>
+            <ReactMarkdown breaks>{markdown}</ReactMarkdown>
           </div>
         </Split>
       ) : (
         <div className="markdown-published">
-          <ReactMarkdown breaks>{processMarkdownWithLineBreaks(markdown)}</ReactMarkdown>
+          <ReactMarkdown breaks>{markdown}</ReactMarkdown>
         </div>
       )}
     </div>
