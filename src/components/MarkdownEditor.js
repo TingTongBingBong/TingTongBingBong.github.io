@@ -3,7 +3,7 @@ import Split from 'react-split';
 import ReactMarkdown from 'react-markdown';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
-import './MarkdownEditor.css';
+import './stylingfiles/MarkdownEditor.css';
 
 const MarkdownEditor = forwardRef(({ initialContent = "", noteId, onContentChange, readOnly = false }, ref) => {
   const [markdown, setMarkdown] = useState(initialContent);

@@ -1,3 +1,11 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensure space between logo and buttons */
+  background-color: #333;
+  padding: 10px 10px;
+}
+
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -6,6 +14,7 @@
 .logo-image {
   height: 40px; /* Adjust as needed */
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .site-name {
@@ -14,16 +23,15 @@
   font-weight: bold;
 }
 
-/* General Navbar Styling */
 nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
+  align-items: center; /* Align buttons vertically with the logo */
 }
 
 nav ul li {
-  position: relative;
   margin-right: 10px;
 }
 
@@ -32,12 +40,9 @@ nav ul li a {
   color: white;
   padding: 10px 20px;
   display: block;
-  background-color: transparent; /* Default background color */
-  transition: background-color 0.3s ease; /* Smooth transition for background color */
+  transition: background-color 0.3s ease;
 }
 
-/* Hover Effect */
 nav ul li a:hover {
-  background-color: gray; /* Highlight background color on hover */
-  color: white; /* Ensure text remains white on hover */
+  background-color: gray;
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import CreateNoteButton from '../components/CreateNoteButton'; // Ensure the correct path
 
 const NotesPage = () => {
   const [notes, setNotes] = useState([]);
@@ -20,6 +21,7 @@ const NotesPage = () => {
   return (
     <div>
       <h1>All Notes</h1>
+      <CreateNoteButton /> {/* Add the CreateNoteButton here */}
       <ul>
         {notes.map(noteId => (
           <li key={noteId}>

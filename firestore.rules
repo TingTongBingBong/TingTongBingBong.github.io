@@ -3,5 +3,8 @@ service cloud.firestore {
     match /notes/{noteId} {
       allow read, write: if true; // Simplified rule for testing, adjust as necessary
     }
+    match /events/{document=**} {
+      allow read, write: if true;
+    }
   }
 }
