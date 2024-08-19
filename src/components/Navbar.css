@@ -1,3 +1,19 @@
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  height: 40px; /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.site-name {
+  font-size: 24px; /* Adjust as needed */
+  color: white;
+  font-weight: bold;
+}
+
 /* General Navbar Styling */
 nav ul {
   list-style: none;
