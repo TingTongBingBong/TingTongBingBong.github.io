@@ -1,8 +1,7 @@
 service cloud.firestore {
   match /databases/{database}/documents {
     match /notes/{noteId} {
-      allow read: if true;
-      allow write: if request.auth != null;
+      allow read, write: if true; // Simplified rule for testing, adjust as necessary
     }
   }
 }

@@ -10,17 +10,8 @@ const Navbar = () => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        <li
-          onMouseEnter={() => setDropdownOpen(true)}
-          onMouseLeave={() => setDropdownOpen(false)}
-        >
+        <li>
           <Link to="/notes">Notes</Link>
-          {dropdownOpen && (
-            <ul className="dropdown">
-              <li><Link to="/notes/subpage1">SubPage 1</Link></li>
-
-            </ul>
-          )}
         </li>
       </ul>
     </nav>
