@@ -14,38 +14,14 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: white;
-  padding: 10px;
+  padding: 10px 20px;
   display: block;
+  background-color: transparent; /* Default background color */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
-/* Dropdown Menu Styling */
-nav ul li .dropdown {
-  display: none;
-  position: absolute;
-  background-color: #333;
-  list-style: none;
-  padding: 5px;
-  margin-top: 5px;
-  min-width: 150px;
-  z-index: 1000; /* Ensure it overlays other content */
-}
-
-/* Show dropdown on hover of parent li */
-nav ul li:hover .dropdown {
-  display: block;
-}
-
-/* Ensure dropdown stays open when hovering over it or its links */
-nav ul li .dropdown li {
-  margin: 0;
-}
-
-nav ul li .dropdown li a {
-  padding: 10px;
-  color: white;
-  display: block;
-}
-
-nav ul li .dropdown li a:hover {
-  background-color: #444;
+/* Hover Effect */
+nav ul li a:hover {
+  background-color: gray; /* Highlight background color on hover */
+  color: white; /* Ensure text remains white on hover */
 }
