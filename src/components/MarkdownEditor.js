@@ -1,48 +1,45 @@
 import React, { useState, useEffect, forwardRef } from 'react';
 import Split from 'react-split';
 import ReactMarkdown from 'react-markdown';
-import { db } from '../firebaseConfig'; // Import Firebase configuration
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { db } from '../firebaseConfig'; // Import the Firestore database instance
 import './MarkdownEditor.css';
 
-const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly = false }, ref) => {
+const MarkdownEditor = forwardRef(({ initialContent = "", noteId, readOnly = false }, ref) => {
   const [markdown, setMarkdown] = useState(initialContent);
   const [history, setHistory] = useState([initialContent]); // Array to store history of states
   const [historyIndex, setHistoryIndex] = useState(0); // Track the current position in the history
 
   useEffect(() => {
-    if (content) {
-      setMarkdown(content);
-      setHistory([content]);
-      setHistoryIndex(0);
-    }
-  }, [content]);
-
-  useEffect(() => {
-    // Load notes from Firebase Firestore
-    const unsubscribe = db.collection('notes').doc('noteId')
-      .onSnapshot((doc) => {
-        if (doc.exists) {
-          setMarkdown(doc.data().content);
-          setHistory([doc.data().content]);
+    if (noteId) {
+      // Fetch existing content from Firestore if it exists
+      const fetchNote = async () => {
+        const docRef = doc(db, "notes", noteId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setMarkdown(docSnap.data().content);
+          setHistory([docSnap.data().content]);
           setHistoryIndex(0);
         }
+      };
+
+      fetchNote();
+    }
+  }, [noteId]);
+
+  const handleSave = async () => {
+    if (noteId) {
+      // Save the content to Firestore
+      await setDoc(doc(db, "notes", noteId), {
+        content: markdown,
+        updatedAt: new Date(),
       });
+      alert('Note published successfully!');
+    } else {
+      alert('Error: Note ID is missing');
+    }
+  };
 
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    // Save notes to Firebase Firestore
-    const saveToFirestore = async () => {
-      await db.collection('notes').doc('noteId').set({
-        content: markdown
-      });
-    };
-
-    saveToFirestore();
-  }, [markdown]);
-
-  // Function to handle input changes and update history
   const handleInputChange = (e) => {
     const newValue = e.target.value;
     const newHistory = history.slice(0, historyIndex + 1);
@@ -51,7 +48,6 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
     setHistoryIndex(newHistory.length);
   };
 
-  // Handle "Ctrl + Z" and "Ctrl + Y" for undo/redo functionality
   const handleKeyDown = (e) => {
     if (e.ctrlKey) {
       if (e.key === 'z' || e.key === 'Z') {
@@ -72,7 +68,6 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
     }
   };
 
-  // Function to add markdown syntax and update history
   const addMarkdownSyntax = (syntax, surround, numberedList = false) => {
     const textarea = ref.current;
     const start = textarea.selectionStart;
@@ -87,8 +82,7 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
         .split('\n')
         .map(line => line ? `${syntax}${line}${syntax}` : '') // Apply syntax to non-empty lines
         .join('\n');
-    } 
-    else {
+    } else {
       newText = selectedText
         .split('\n')
         .map(line => `${syntax}${line}`)
@@ -107,7 +101,6 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
     }, 0);
   };
 
-  // Custom function for adding links
   const addLink = () => {
     const textarea = ref.current;
     const start = textarea.selectionStart;
@@ -116,7 +109,6 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
     const selectedText = textarea.value.substring(start, end);
     const afterText = textarea.value.substring(end);
 
-    // Split the selected text by lines and apply the link formatting to each line
     const newText = selectedText
       .split('\n')
       .map(line => line ? `[${line}](http://)` : '') // Apply link formatting to non-empty lines
@@ -143,7 +135,8 @@ const MarkdownEditor = forwardRef(({ initialContent = "", content = "", readOnly
           <button onClick={() => addMarkdownSyntax('# ', false)}>Heading</button>
           <button onClick={() => addMarkdownSyntax('* ', false)}>Bullet List</button>
           <button onClick={() => addMarkdownSyntax('- [ ] ', false)}>Checklist</button>
-          <button onClick={addLink}>Link</button> {/* Updated Link Button */}
+          <button onClick={addLink}>Link</button>
+          <button onClick={handleSave}>Publish</button> {/* Publish button to save content */}
         </div>
       )}
       {!readOnly ? (
