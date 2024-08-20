@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createNote } from '../firestoreUtils';
+import './stylingfiles/NameNotePage.css';
 
 const NameNotePage = () => {
   const [noteName, setNoteName] = useState('');

@@ -9,7 +9,6 @@ import AboutPage from './pages/AboutPage';
 import Navbar from './components/Navbar';
 import IDhandle from './components/IDhandle';
 
-
 import './App.css';
 
 function App() {

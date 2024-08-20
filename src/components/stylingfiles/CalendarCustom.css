@@ -1,113 +1,145 @@
 .calendar-container {
   width: 350px;
   margin: 0 auto;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #000000; /* Solid Black for a clean neon contrast */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Deep shadow for a bold effect */
   border-radius: 12px;
   padding: 20px;
   text-align: center; /* Center text within the container */
 }
 
-  .calendar-container h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+.calendar-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #FF1493; /* Neon Pink */
+  text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
+}
+
+.react-calendar {
+  border: none;
+  font-family: 'Orbitron', sans-serif; /* Retro font */
+  background-color: transparent; /* Transparent to keep the black background */
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.react-calendar__navigation button {
+  background-color: transparent;
+  border: none;
+  color: #39FF14; /* Neon Green */
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.react-calendar__navigation button:hover {
+  background-color: rgba(57, 255, 20, 0.1); /* Light neon green on hover */
+  color: #39FF14; /* Neon Green */
+  box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14; /* Neon glow on hover */
+}
+
+.react-calendar__month-view__days__day {
+  color: #FFFFFF; /* White text */
+  font-weight: bold;
+  font-size: 14px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 2px;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #555555; /* Dark gray for neighboring months */
+}
+
+.react-calendar__tile--now {
+  background-color: #FF1493; /* Neon Pink for the current day */
+  border-radius: 8px;
+  color: #FFFFFF; /* White text */
+  text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
+}
+
+.react-calendar__tile--active,
+.react-calendar__tile--active:enabled,
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background-color: #39FF14 !important; /* Neon Green for the selected day */
+  color: #000000 !important; /* Black text for contrast */
+  border-radius: 8px;
+  box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14; /* Neon glow effect */
+}
+
+.react-calendar__tile--hover {
+  background-color: rgba(57, 255, 20, 0.2); /* Light neon green on hover */
+  color: #FFFFFF; /* White text */
+}
+
+.event-dot {
+  height: 8px;
+  width: 8px;
+  background-color: #FF1493; /* Neon Pink */
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-top: 5px;
+  box-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
+}
+
+.event-details {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #000000; /* Solid black background */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Deep shadow */
+  color: #FFFFFF; /* White text */
+}
+
+.event-details h3 {
+  margin-top: 0;
+  color: #FF1493; /* Neon Pink */
+  text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
+}
+
+.event-details ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.event-details li {
+  margin-bottom: 10px;
+  color: #FFFFFF; /* White text */
+}
+
+.add-event-button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #FF1493; /* Neon Pink */
+  color: #FFFFFF; /* White text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-event-button:hover {
+  background-color: #FF69B4; /* Lighter Neon Pink */
+  box-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow on hover */
+}
+
+@media (max-width: 500px) {
+  .calendar-container {
+    width: 100%;
   }
-  
-  .react-calendar {
-    border: none;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .react-calendar__navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .react-calendar__navigation button {
-    background-color: transparent;
-    border: none;
-    color: #0078d4;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .react-calendar__navigation button:hover {
-    background-color: rgba(0, 120, 212, 0.1);
-  }
-  
-  .react-calendar__month-view__days__day {
-    color: #333;
-    font-weight: bold;
-    font-size: 14px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-    margin: 2px;
-  }
-  
-  .react-calendar__month-view__days__day--neighboringMonth {
-    color: #aaa;
-  }
-  
-  .react-calendar__tile--now {
-    background-color: #e5e5e5;
-    border-radius: 8px;
-  }
-  
-  .react-calendar__tile--active {
-    background-color: #0078d4;
-    color: white;
-    border-radius: 8px;
-  }
-  
-  .react-calendar__tile--hover {
-    background-color: rgba(0, 120, 212, 0.1);
-  }
-  
-  @media (max-width: 500px) {
-    .calendar-container {
-      width: 100%;
-    }
-  }
-  
-  .event-dot {
-    height: 8px;
-    width: 8px;
-    background-color: #0078d4;
-    border-radius: 50%;
-    margin: 0 auto;
-    margin-top: 5px;
-  }
-  
-  .event-details {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .event-details h3 {
-    margin-top: 0;
-  }
-  
-  .event-details ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .event-details li {
-    margin-bottom: 10px;
-  }
-  
+}

@@ -20,8 +20,7 @@ const NotesPage = () => {
 
   return (
     <div>
-      <h1>All Notes</h1>
-      <CreateNoteButton /> {/* Add the CreateNoteButton here */}
+      <h1>Collaborative Notes</h1>
       <ul>
         {notes.map(noteId => (
           <li key={noteId}>
@@ -29,6 +28,7 @@ const NotesPage = () => {
           </li>
         ))}
       </ul>
+      <CreateNoteButton />
     </div>
   );
 };

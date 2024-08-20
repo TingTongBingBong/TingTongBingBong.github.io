@@ -2,8 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between; /* Ensure space between logo and buttons */
-  background-color: #333;
+  background-color: #000000; /* Solid Black for a clean neon contrast */
   padding: 10px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Slight shadow for depth */
 }
 
 .navbar-logo {
@@ -15,12 +16,14 @@
   height: 40px; /* Adjust as needed */
   margin-right: 10px;
   margin-left: 10px;
+  filter: drop-shadow(0 0 5px #FF1493); /* Neon green glow */
 }
 
 .site-name {
   font-size: 24px; /* Adjust as needed */
-  color: white;
+  color: #FF1493; /* Neon Pink */
   font-weight: bold;
+  text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
 }
 
 nav ul {
@@ -37,12 +40,17 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: white;
+  color: #FFFFFF; /* White text */
   padding: 10px 20px;
   display: block;
-  transition: background-color 0.3s ease;
+  background-color: transparent;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Orbitron', sans-serif; /* Retro font */
 }
 
 nav ul li a:hover {
-  background-color: gray;
+  background-color: #FF1493; /* Neon Pink */
+  color: #FFFFFF;
+  box-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow on hover */
 }

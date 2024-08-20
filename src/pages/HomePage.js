@@ -1,13 +1,15 @@
 import React from 'react';
-import EventCalendar from '../components/EventCalendar.js'; // Adjust the path if necessary
+import EventCalendar from '../components/EventCalendar.js';
+import './stylingfiles/HomePage.css';
 
 const HomePage = () => {
   return (
-    <div className="homepage">
-      <h1>TingTongBingBong</h1>
-      <EventCalendar /> {/* Use the EventCalendar component here */}
+    <div class="homepage-container">
+      <div class="content-area">
+        <EventCalendar />
+      </div>
     </div>
   );
-}
+};
 
 export default HomePage;
