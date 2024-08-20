@@ -1,10 +1,16 @@
-.name-note-page {
+.name-note-page-container {
+    display: flex;
+    justify-content: center;
     max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .name-note-page{
+    align-content: center;
+    margin-top: 10px;
     background-color: #f5f5f5;
     border-radius: 10px;
-    text-align: center;
   }
   
   .name-note-page input {
@@ -16,15 +22,19 @@
   }
   
   .name-note-page button {
+    text-decoration: none;
+    color: #000000; /* White text */
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+    display: block;
+    background-color: #39FF14;
     border-radius: 5px;
-    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Orbitron', sans-serif; /* Retro font */
   }
   
   .name-note-page button:hover {
-    background-color: #0056b3;
+    background-color: #FF1493; /* Neon Pink */
+    color: #FFFFFF;
+    box-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow on hover */
   }
   

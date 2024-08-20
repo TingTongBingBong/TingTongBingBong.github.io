@@ -67,7 +67,7 @@
 .react-calendar__tile--now {
   background-color: #FF1493; /* Neon Pink for the current day */
   border-radius: 8px;
-  color: #FFFFFF; /* White text */
+  color: #000000;
   text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
 }
 
@@ -75,15 +75,15 @@
 .react-calendar__tile--active:enabled,
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background-color: #39FF14 !important; /* Neon Green for the selected day */
-  color: #000000 !important; /* Black text for contrast */
-  border-radius: 8px;
-  box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14; /* Neon glow effect */
+  background-color: #39FF14 !important;
+  color: #FF1493 !important;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #39FF14, 0 0 8px #39FF14; /* Neon glow effect */
 }
 
 .react-calendar__tile--hover {
-  background-color: rgba(57, 255, 20, 0.2); /* Light neon green on hover */
-  color: #FFFFFF; /* White text */
+  background-color: #a2f793; /* Light neon green on hover */
+  color: #000000;
 }
 
 .event-dot {
@@ -92,7 +92,7 @@
   background-color: #FF1493; /* Neon Pink */
   border-radius: 50%;
   margin: 0 auto;
-  margin-top: 5px;
+  margin-top: 0;
   box-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
 }
 
@@ -124,8 +124,8 @@
 .add-event-button {
   margin-top: 20px;
   padding: 10px 15px;
-  background-color: #FF1493; /* Neon Pink */
-  color: #FFFFFF; /* White text */
+  background-color: #39FF14;
+  color: #000000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -134,8 +134,9 @@
 }
 
 .add-event-button:hover {
-  background-color: #FF69B4; /* Lighter Neon Pink */
-  box-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow on hover */
+  color: #000000;
+  background-color: #a2f793; /* Lighter Neon Pink */
+  box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14; /* Neon glow on hover */
 }
 
 @media (max-width: 500px) {

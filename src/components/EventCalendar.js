@@ -86,7 +86,7 @@ const EventCalendar = () => {
 
 return (
     <div className="calendar-container">
-      <h2>Server Calendar</h2>
+      <h2>Server Event Calendar</h2>
       <Calendar 
         onChange={onChange} 
         value={date} 

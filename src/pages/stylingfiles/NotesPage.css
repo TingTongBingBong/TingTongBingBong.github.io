@@ -5,7 +5,7 @@ body {
     background-color: #000000; /* Black background for the entire page */
   }
   
-  .homepage-container {
+  .notepage-container {
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Align to the top */
@@ -16,9 +16,9 @@ body {
     background-size: cover;
   }
   
-  .homepage-content-area {
+  .note-content-area {
     width: 50%; /* Middle 50% of the page */
-    background-color: #111111; /* Darker gray to distinguish from black */
+    background-color: #111111;
     padding: 20px;
     border: 5px solid #FF1493; /* Neon Pink border */
     box-shadow: 0 0 15px #FF1493; /* Neon Pink glow around the content */
@@ -26,20 +26,14 @@ body {
     min-height: calc(100vh - 20px); /* Extend content to the bottom, accounting for padding */
   }
 
-  .homepage-site-exploration {
+  .note-page-content {
     margin-bottom: 20px;
-    text-align: center;
+    text-align: Left;
   }
   
-  .homepage-site-exploration h2 {
+  .note-page-content h2 {
     color: #FF1493; /* Neon Pink */
     text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  
-  .homepage-site-exploration p {
-    color: #FFFFFF; /* White text */
     margin-bottom: 10px;
   }
 
@@ -55,7 +49,29 @@ body {
     margin: 0;
     padding: 0;
   }
-  
+
+  section ul li {
+    color: #bc14ff; /* Neon Pink */
+    margin-bottom: 10px;
+  }
+
+  .note-content-area button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #39FF14;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.note-content-area button:hover {
+  color: #000000;
+  background-color: #a2f793;
+  box-shadow: 0 0 5px #39FF14, 0 0 10px #39FF14;
+}
   
   @media (max-width: 768px) {
     .content-area {

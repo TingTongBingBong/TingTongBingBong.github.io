@@ -22,7 +22,8 @@ const NameNotePage = () => {
   };
 
   return (
-    <div className="name-note-page">
+    <div className="name-note-page-container">
+      <div className="name-note-page">
       <h2>Name Your Note</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -31,8 +32,12 @@ const NameNotePage = () => {
           onChange={(e) => setNoteName(e.target.value)}
           placeholder="Enter note name"
         />
+        <p>
+          THIS NAME CANNOT BE CHANGED LATER!
+        </p>
         <button type="submit">Create Note</button>
       </form>
+    </div>
     </div>
   );
 };

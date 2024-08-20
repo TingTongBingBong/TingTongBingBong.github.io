@@ -1,21 +1,16 @@
 {
-  "short_name": "NotesApp",
-  "name": "Collaborative Notes App",
+  "short_name": "TTBBsite",
+  "name": "Ting Tong Bing Bong",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "favicon.gif",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/gif"
     },
     {
       "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "display": "standalone",

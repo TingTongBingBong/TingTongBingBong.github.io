@@ -4,7 +4,7 @@ import NoteSubPage from '../pages/NoteSubPage';
 
 const IDhandle = () => {
     const { noteId } = useParams(); // Extract noteId from URL params
-    return <NoteSubPage title={`Note ${noteId}`} noteId={noteId} />;
+    return <NoteSubPage title={`${noteId}`} noteId={noteId} />;
   };
 
 

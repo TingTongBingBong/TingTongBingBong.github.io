@@ -1,22 +1,25 @@
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Ensure space between logo and buttons */
+  justify-content: center; /* Center all content horizontally */
   background-color: #000000; /* Solid Black for a clean neon contrast */
   padding: 10px 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Slight shadow for depth */
+  position: relative; /* Allows absolute positioning of the auth section */
 }
 
 .navbar-logo {
   display: flex;
   align-items: center;
+  justify-content: center; /* Center the logo and GIF together */
+  flex-grow: 1; /* Allow the logo section to grow and take up available space */
 }
 
 .logo-image {
   height: 40px; /* Adjust as needed */
   margin-right: 10px;
   margin-left: 10px;
-  filter: drop-shadow(0 0 5px #FF1493); /* Neon green glow */
+  filter: drop-shadow(0 0 5px #FF1493); /* Neon glow */
 }
 
 .site-name {
@@ -32,6 +35,8 @@ nav ul {
   margin: 0;
   display: flex;
   align-items: center; /* Align buttons vertically with the logo */
+  position: absolute;
+  left: 10px; /* Adjust to align the buttons to the left */
 }
 
 nav ul li {
@@ -53,4 +58,69 @@ nav ul li a:hover {
   background-color: #FF1493; /* Neon Pink */
   color: #FFFFFF;
   box-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow on hover */
+}
+
+.auth-section {
+  position: absolute;
+  right: 10px; /* Position auth section on the right side of the navbar */
+  display: flex;
+  align-items: center;
+}
+
+.login-button {
+  background-color: #FF1493; /* Neon Pink */
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #FF69B4; /* Lighter Neon Pink on hover */
+}
+
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-button {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.profile-icon {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.profile-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #222222;
+  border: 1px solid #FF1493;
+  padding: 10px;
+  box-shadow: 0 0 10px #FF1493;
+}
+
+.profile-dropdown:hover .profile-menu {
+  display: block;
+}
+
+.profile-menu p {
+  margin: 0;
+  padding: 5px 0;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.profile-menu p:hover {
+  background-color: #FF69B4;
 }

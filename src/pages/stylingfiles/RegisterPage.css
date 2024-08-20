@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif; /* Retro font to match the theme */
+    background-color: #000000; /* Black background for the entire page */
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the content both vertically and horizontally */
+    min-height: 100vh; /* Full height of the viewport */
+    background-image: url('/public/images/neon_shapes_background.png'); /* Replace with the correct path */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.register-content-area {
+    width: 50%; /* Middle 50% of the page */
+    background-color: #111111; /* Darker gray to distinguish from black */
+    padding: 20px;
+    border: 5px solid #FF1493; /* Neon Pink border */
+    box-shadow: 0 0 15px #FF1493; /* Neon Pink glow around the content */
+    margin-top: 0; /* Ensure no margin at the top */
+    min-height: 400px; /* Minimum height for the content area */
+    text-align: center; /* Center text and form elements */
+}
+
+.register-content-area h2 {
+    color: #FF1493; /* Neon Pink */
+    text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
+    margin-bottom: 20px;
+}
+
+.register-content-area input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #222222; /* Dark background for inputs */
+    border: 1px solid #FF1493; /* Neon Pink border */
+    color: #FFFFFF; /* White text */
+    font-size: 16px;
+    box-shadow: 0 0 10px #FF1493; /* Neon glow for inputs */
+    outline: none;
+}
+
+.register-content-area button {
+    padding: 10px 20px;
+    background-color: #FF1493; /* Neon Pink button */
+    border: none;
+    color: #FFFFFF; /* White text */
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #FF1493; /* Neon glow on the button */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-content-area button:hover {
+    background-color: #FF69B4; /* Lighter Neon Pink on hover */
+    box-shadow: 0 0 15px #FF69B4; /* Stronger glow on hover */
+}

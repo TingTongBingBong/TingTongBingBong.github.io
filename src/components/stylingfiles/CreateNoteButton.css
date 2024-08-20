@@ -1,0 +1,16 @@
+button {
+    text-decoration: none;
+    color: #000000; /* White text */
+    padding: 10px 20px;
+    display: block;
+    background-color: #39FF14;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Orbitron', sans-serif; /* Retro font */
+}
+
+button:hover {
+    background-color: #FF1493; /* Neon Pink */
+    color: #FFFFFF;
+    box-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow on hover */
+}

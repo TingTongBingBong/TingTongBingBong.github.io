@@ -5,7 +5,7 @@ body {
     background-color: #000000; /* Black background for the entire page */
   }
   
-  .homepage-container {
+  .aboutpage-container {
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Align to the top */
@@ -16,7 +16,7 @@ body {
     background-size: cover;
   }
   
-  .homepage-content-area {
+  .about-content-area {
     width: 50%; /* Middle 50% of the page */
     background-color: #111111; /* Darker gray to distinguish from black */
     padding: 20px;
@@ -26,21 +26,29 @@ body {
     min-height: calc(100vh - 20px); /* Extend content to the bottom, accounting for padding */
   }
 
-  .homepage-site-exploration {
+  .about-page-content {
     margin-bottom: 20px;
     text-align: center;
   }
   
-  .homepage-site-exploration h2 {
+  .about-page-content h2 {
     color: #FF1493; /* Neon Pink */
     text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     text-align: center;
   }
+
+  .about-page-content h3 {
+    color: #fa8cc7; /* Neon Pink */
+    text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow effect */
+    margin-bottom: 15px;
+    text-align: left;
+  }
   
-  .homepage-site-exploration p {
+  .about-page-content p {
     color: #FFFFFF; /* White text */
     margin-bottom: 10px;
+    text-align: left;
   }
 
   .author-section {
@@ -55,7 +63,6 @@ body {
     margin: 0;
     padding: 0;
   }
-  
   
   @media (max-width: 768px) {
     .content-area {

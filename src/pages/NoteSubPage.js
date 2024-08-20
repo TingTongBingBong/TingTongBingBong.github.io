@@ -3,6 +3,7 @@ import MarkdownEditor from '../components/MarkdownEditor';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import ReactMarkdown from 'react-markdown';
+import './stylingfiles/NoteSubPage.css'
 
 const NoteSubPage = ({ title, noteId }) => {
   const [editMode, setEditMode] = useState(false);
@@ -56,7 +57,7 @@ const NoteSubPage = ({ title, noteId }) => {
   };
 
   return (
-    <div>
+    <div class='published-content'>
       <h1>{title}</h1>
       <button onClick={editMode ? handlePublish : () => setEditMode(true)}>
         {editMode ? "Publish" : "Edit"}
