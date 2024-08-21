@@ -69,27 +69,37 @@ const NoteSubPage = ({ title, noteId }) => {
     
     if (noteId && user) {
       try {
-        // Get the existing document to preserve the 'users' field
-        const noteRef = doc(db, "notes", noteId);
-        const noteSnap = await getDoc(noteRef);
+        // Get the user's username from the users collection
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
 
-        if (noteSnap.exists()) {
-          const noteData = noteSnap.data();
+        if (userDoc.exists()) {
+          const username = userDoc.data().username;
 
-          // Update the document with content, updatedAt, and the user who published it
-          await setDoc(noteRef, {
-            content: currentContent,
-            updatedAt: new Date(),
-            lastPublishedBy: user.displayName || user.email, // Store the user's display name or email
-            users: noteData.users // Preserve the 'users' field
-          }, { merge: true });
+          // Get the existing note document to preserve the 'users' field
+          const noteRef = doc(db, "notes", noteId);
+          const noteSnap = await getDoc(noteRef);
 
-          alert('Note published successfully!');
-          setContent(currentContent); // Update the state with the saved content
-          setLastPublishedBy(user.displayName || user.email); // Update the state with the user's info
-          setLastUpdatedAt(new Date().toLocaleString()); // Update the state with the current time
+          if (noteSnap.exists()) {
+            const noteData = noteSnap.data();
+
+            // Update the note document with content, updatedAt, and the username of the user who published it
+            await setDoc(noteRef, {
+              content: currentContent,
+              updatedAt: new Date(),
+              lastPublishedBy: username, // Store the username from the users collection
+              users: noteData.users // Preserve the 'users' field
+            }, { merge: true });
+
+            alert('Note published successfully!');
+            setContent(currentContent); // Update the state with the saved content
+            setLastPublishedBy(username); // Update the state with the user's username
+            setLastUpdatedAt(new Date().toLocaleString()); // Update the state with the current time
+          } else {
+            console.log("No such document!");
+          }
         } else {
-          console.log("No such document!");
+          console.log("User document not found!");
         }
       } catch (error) {
         console.error("Error saving note:", error);
