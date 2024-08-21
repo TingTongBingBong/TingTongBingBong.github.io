@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, setDoc, serverTimestamp, getDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { auth, db, storage } from '../firebaseConfig';
 import GoogleLogin from '../components/GoogleLogin'; // Import the GoogleLogin component
@@ -15,6 +15,7 @@ function RegisterPage() {
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [profilePictureFile, setProfilePictureFile] = useState(null);
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
@@ -37,18 +38,11 @@ function RegisterPage() {
     return usernameRegex.test(username);
   };
 
-  const handleFileChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const storageRef = ref(storage, `profilePictures/${file.name}`);
-      await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(storageRef);
-      setProfilePictureFile(downloadURL);
-    }
-  };
-
   const handleRegister = async (e) => {
     e.preventDefault();
+    setError('');
+
+    console.log('Starting registration process...');
 
     if (!validateEmail(email)) {
       alert('Please enter a valid email address.');
@@ -76,24 +70,57 @@ function RegisterPage() {
     }
 
     try {
+      console.log('Checking if username is unique...');
+      // Check if username is unique using the usernameCheck collection
+      const usernameDocRef = doc(db, 'usernameCheck', username);
+      const usernameDoc = await getDoc(usernameDocRef);
+
+      if (usernameDoc.exists()) {
+        setError('Username already taken. Please choose another one.');
+        console.log('Username already taken.');
+        return;
+      }
+
+      console.log('Creating the user in Firebase Authentication...');
+      // Create the user in Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      console.log('User created with UID:', user.uid);
+
+      // Upload the profile picture (if selected)
+      let profilePictureURL = '';
+      if (profilePictureFile) {
+        console.log('Uploading profile picture...');
+        const storageRef = ref(storage, `profilePictures/${user.uid}`);
+        await uploadBytes(storageRef, profilePictureFile);
+        profilePictureURL = await getDownloadURL(storageRef);
+        console.log('Profile picture uploaded:', profilePictureURL);
+      } else {
+        console.log('No profile picture uploaded.');
+      }
+
+      console.log('Saving user data in Firestore...');
+      // Save the user data in Firestore after authentication
       await setDoc(doc(db, 'users', user.uid), {
-        email: email,
-        fullName: fullName,
-        username: username,
-        dateOfBirth: dateOfBirth,
-        profilePicture: profilePictureFile || '',
-        termsAccepted: termsAccepted,
+        email,
+        fullName,
+        username,
+        dateOfBirth,
+        profilePicture: profilePictureURL,
+        termsAccepted,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
 
-      console.log('User registered and data stored in Firestore:', user.uid);
+      // Save the username in the usernameCheck collection
+      await setDoc(usernameDocRef, { used: true });
+
+      console.log('User data stored in Firestore:', user.uid);
       navigate('/');
     } catch (error) {
       console.error('Error registering user:', error.message);
+      setError(error.message);
     }
   };
 
@@ -101,6 +128,7 @@ function RegisterPage() {
     <div className="register-container">
       <div className="register-content-area">
         <h2>Register</h2>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <form onSubmit={handleRegister}>
           <input
             type="text"
@@ -144,7 +172,7 @@ function RegisterPage() {
               id="profilePicture"
               name="profilePicture"
               accept="image/*"
-              onChange={handleFileChange}
+              onChange={(e) => setProfilePictureFile(e.target.files[0])}
             />
           </div>
           <div className="terms-acceptance">

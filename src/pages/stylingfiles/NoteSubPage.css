@@ -1,3 +1,94 @@
+/* General container for the note page */
 .published-content {
-    padding-left: 10px;
-}
+    width: 100%; /* Fill the entire width of the page */
+    margin: 0;
+    padding: 20px 40px; /* Adjusted padding for better spacing */
+    background-color: #f9f9f9; /* Light background for content area */
+    font-family: Arial, sans-serif; /* Simple, readable font */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+  }
+  
+  /* Heading styles */
+  .published-content h1 {
+    font-size: 2em; /* Slightly smaller font size */
+    color: #333;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .published-content h2 {
+    font-size: 1.5em; /* Slightly smaller font size */
+    color: #555;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  
+  /* Paragraph and text styles */
+  .published-content p {
+    font-size: 1em; /* Slightly smaller font size */
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Link styles */
+  .published-content a {
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .published-content a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Button styles */
+  .published-content button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #ffffff;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  .published-content button:hover {
+    background-color: #555;
+  }
+  
+  /* Markdown content styling */
+  .published-content div {
+    font-size: 1em;
+    color: #444;
+  }
+  
+  /* List styles */
+  .published-content ul, .published-content ol {
+    padding-left: 40px;
+    margin-bottom: 20px;
+  }
+  
+  /* Code block styling */
+  .published-content pre {
+    background-color: #f5f5f5;
+    border-left: 3px solid #ccc;
+    padding: 10px;
+    overflow-x: auto;
+  }
+  
+  .published-content code {
+    background-color: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 3px;
+  }
+  
+  /* Image styles */
+  .published-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+  }
+  

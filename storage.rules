@@ -1,7 +1,13 @@
 service firebase.storage {
   match /b/{bucket}/o {
-    match /profilePictures/{userId} {
+    match /profilePictures/{userId}/{allPaths=**} {
+      // Allow users to read and write their own profile pictures
       allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // General rule for other types of files (if necessary)
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
     }
   }
 }

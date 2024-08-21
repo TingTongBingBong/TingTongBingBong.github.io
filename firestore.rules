@@ -1,16 +1,25 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /notes/{document=**} {
-      allow read, write: if true; // This allows anyone to read/write. Use with caution.
-    }
-    match /events/{document=**} {
-      allow read, write: if true;
-    }
-    match /users/{userId} {
-      
-      allow read, write: if request.auth != null && request.auth.uid == userId;
 
-      allow list: if false;
+    // Username Check Collection: Allow unauthenticated users to read the document for username checking
+    match /usernameCheck/{username} {
+      allow get: if true;  // Allows unauthenticated access to check if a username exists
+      allow create: if request.auth != null && !exists(/databases/$(database)/documents/usernameCheck/$(username));
+    }
+
+    // Users Collection: Users can only read and write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Notes Collection: Only authenticated users can read or write notes
+    match /notes/{noteId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Events Collection: Only authenticated users can read or write events
+    match /events/{eventId} {
+      allow read, write: if request.auth != null;
     }
   }
 }

@@ -1,40 +1,71 @@
-.name-note-page-container {
-    display: flex;
-    justify-content: center;
-    max-width: 400px;
-    margin: 0;
-    padding: 0;
-  }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #000000; /* Fallback color */
+  background-image: url('/public/images/neon_shapes_background.png'); /* Ensure the path is correct */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+}
 
-  .name-note-page{
-    align-content: center;
-    margin-top: 10px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-  }
-  
-  .name-note-page input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .name-note-page button {
-    text-decoration: none;
-    color: #000000; /* White text */
-    padding: 10px 20px;
-    display: block;
-    background-color: #39FF14;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-family: 'Orbitron', sans-serif; /* Retro font */
-  }
-  
-  .name-note-page button:hover {
-    background-color: #FF1493; /* Neon Pink */
-    color: #FFFFFF;
-    box-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow on hover */
-  }
-  
+.name-note-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.name-note-page {
+  background-color: #111111; /* Darker background for content */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #FF1493; /* Neon Pink Glow */
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.name-note-page h2 {
+  color: #FF1493; /* Neon Pink for title */
+  text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493; /* Neon glow */
+  margin-bottom: 20px;
+}
+
+.name-note-page input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #FF1493; /* Neon Pink border */
+  border-radius: 5px;
+  background-color: #222222; /* Dark input background */
+  color: #FFFFFF; /* White text */
+  box-shadow: 0 0 10px #FF1493; /* Neon Pink Glow */
+}
+
+.name-note-page p {
+  color: #FF69B4; /* Light Pink warning */
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.name-note-page button {
+  width: 100%;
+  padding: 12px;
+  background-color: #39FF14; /* Neon Green */
+  border: none;
+  border-radius: 5px;
+  color: #000000; /* Black text */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 0 15px #39FF14; /* Neon Green Glow */
+}
+
+.name-note-page button:hover {
+  background-color: #FF1493; /* Neon Pink on hover */
+  color: #FFFFFF;
+  box-shadow: 0 0 15px #FF1493; /* Neon Pink Glow on hover */
+}

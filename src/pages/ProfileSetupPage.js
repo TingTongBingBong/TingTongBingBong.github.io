@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, setDoc, serverTimestamp, getDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { auth, db, storage } from '../firebaseConfig';
 import './stylingfiles/ProfileSetupPage.css';
@@ -12,6 +12,7 @@ function ProfileSetupPage() {
   const [profilePictureFile, setProfilePictureFile] = useState(null);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ function ProfileSetupPage() {
     return usernameRegex.test(username);
   };
 
-  const handleFileChange = async (e) => {
+  const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setProfilePictureFile(file);
@@ -35,6 +36,8 @@ function ProfileSetupPage() {
 
   const handleProfileSetup = async (e) => {
     e.preventDefault();
+    setError('');
+
     const user = auth.currentUser;
 
     if (!user) {
@@ -58,6 +61,18 @@ function ProfileSetupPage() {
     }
 
     try {
+      console.log('Checking if username is unique...');
+      // Check if username is unique using the usernameCheck collection
+      const usernameDocRef = doc(db, 'usernameCheck', username);
+      const usernameDoc = await getDoc(usernameDocRef);
+
+      if (usernameDoc.exists()) {
+        setError('Username already taken. Please choose another one.');
+        console.log('Username already taken.');
+        return;
+      }
+
+      console.log('Username is available. Proceeding with profile setup...');
       setUploading(true);
       let profilePictureURL = '';
 
@@ -77,11 +92,15 @@ function ProfileSetupPage() {
         updatedAt: serverTimestamp(),
       }, { merge: true });
 
+      // Save the username in the usernameCheck collection
+      await setDoc(usernameDocRef, { used: true });
+
       setUploading(false);
       navigate('/');
     } catch (error) {
       console.error('Error saving user profile:', error.message);
       setUploading(false);
+      setError(error.message);
     }
   };
 
@@ -89,6 +108,7 @@ function ProfileSetupPage() {
     <div className="profile-setup-container">
       <div className="profile-setup-content">
         <h2>Complete Your Profile</h2>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <form onSubmit={handleProfileSetup}>
           <input
             type="text"

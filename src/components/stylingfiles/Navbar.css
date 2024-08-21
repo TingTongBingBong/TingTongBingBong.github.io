@@ -62,7 +62,7 @@ nav ul li a:hover {
 
 .auth-section {
   position: absolute;
-  right: 10px; /* Position auth section on the right side of the navbar */
+  right: 30px; /* Shift the auth section to the left */
   display: flex;
   align-items: center;
 }
@@ -86,7 +86,7 @@ nav ul li a:hover {
 }
 
 .profile-button {
-  padding-right: 15px;
+  padding-right: 15px; /* Adjust to shift the button to the left */
   background: none;
   border: none;
   color: #FFFFFF;
@@ -115,7 +115,7 @@ nav ul li a:hover {
   display: none;
   position: absolute;
   top: 90%; /* Start the dropdown at the bottom of the navbar */
-  left: -20px; /* Anchor it to the left side */
+  left: 0; /* Anchor it to the left side */
   background-color: #222222;
   border: 1px solid #FF1493;
   padding: 10px;

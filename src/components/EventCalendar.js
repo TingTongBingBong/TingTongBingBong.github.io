@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './stylingfiles/CalendarCustom.css';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig';
+import { collection, addDoc, getDocs, doc, getDoc } from 'firebase/firestore';
+import { db, auth } from '../firebaseConfig';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const EventCalendar = () => {
   const [date, setDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   const [selectedEvents, setSelectedEvents] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -21,12 +23,34 @@ const EventCalendar = () => {
       setEvents(eventsList);
     };
 
+    const checkUserRole = async (user) => {
+      if (user) {
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        console.log('User document:', userDoc.data()); // Debugging output
+
+        if (userDoc.exists()) {
+          const role = userDoc.data().role;
+          console.log('User role:', role); // Debugging output
+          setIsAdmin(role === 'admin');
+        } else {
+          console.log('No user document found');
+        }
+      } else {
+        console.log('No user is currently authenticated');
+      }
+    };
+
     fetchEvents();
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      checkUserRole(user);
+    });
+
+    return () => unsubscribe(); // Cleanup subscription on unmount
   }, []);
 
   const onChange = (newDate) => {
     setDate(newDate);
-    // Filter events for the selected date
     const eventsForSelectedDate = events.filter(event => 
       new Date(event.date.toDate()).toDateString() === newDate.toDateString()
     );
@@ -53,38 +77,34 @@ const EventCalendar = () => {
     const eventDate = window.prompt("Enter event date (YYYY-MM-DD):");
 
     if (eventName && eventLocation && eventDate) {
-        try {
-            // Manually create a Date object to avoid time zone issues
-            const [year, month, day] = eventDate.split('-').map(Number);
-            const eventDateTime = new Date(year, month - 1, day, 12, 0, 0); // Set time to noon to avoid timezone issues
+      try {
+        const [year, month, day] = eventDate.split('-').map(Number);
+        const eventDateTime = new Date(year, month - 1, day, 12, 0, 0);
 
-            await addDoc(collection(db, 'events'), {
-                name: eventName,
-                location: eventLocation,
-                date: eventDateTime
-            });
+        await addDoc(collection(db, 'events'), {
+          name: eventName,
+          location: eventLocation,
+          date: eventDateTime
+        });
 
-            // Re-fetch events to update the calendar
-            const eventsCollection = collection(db, 'events');
-            const eventsSnapshot = await getDocs(eventsCollection);
-            const eventsList = eventsSnapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
-            setEvents(eventsList);
+        const eventsCollection = collection(db, 'events');
+        const eventsSnapshot = await getDocs(eventsCollection);
+        const eventsList = eventsSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setEvents(eventsList);
 
-            alert("Event added successfully!");
-        } catch (error) {
-            console.error("Error adding event: ", error);
-        }
+        alert("Event added successfully!");
+      } catch (error) {
+        console.error("Error adding event: ", error);
+      }
     } else {
-        alert("All fields are required to add an event.");
+      alert("All fields are required to add an event.");
     }
-};
+  };
 
-
-
-return (
+  return (
     <div className="calendar-container">
       <h2>Server Event Calendar</h2>
       <Calendar 
@@ -92,7 +112,9 @@ return (
         value={date} 
         tileContent={tileContent}
       />
-      <button className="add-event-button" onClick={addEvent}>Add Event</button>
+      {isAdmin && (
+        <button className="add-event-button" onClick={addEvent}>Add Event</button>
+      )}
       {selectedEvents.length > 0 && (
         <div className="event-details">
           <h3>Events on {formatDate(date)}:</h3>
