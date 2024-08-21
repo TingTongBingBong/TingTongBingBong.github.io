@@ -1,0 +1,15 @@
+.google-signin {
+    text-align: center; /* Center the Google logo within the container */
+    margin-top: 20px; /* Add some space above the Google logo */
+}
+
+.google-logo {
+    height: 40px; /* Adjust the size of the Google logo */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.google-logo:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+    box-shadow: 0 0 10px #4285F4; /* Blue glow on hover */
+}

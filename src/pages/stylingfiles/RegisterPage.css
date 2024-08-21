@@ -1,3 +1,4 @@
+/* General body styles */
 body {
     margin: 0;
     padding: 0;
@@ -33,7 +34,10 @@ body {
     margin-bottom: 20px;
 }
 
-.register-content-area input {
+.register-content-area input[type="text"],
+.register-content-area input[type="email"],
+.register-content-area input[type="password"],
+.register-content-area input[type="date"] {
     width: 80%;
     padding: 10px;
     margin-bottom: 20px;
@@ -45,6 +49,16 @@ body {
     outline: none;
 }
 
+.register-content-area input[type="date"] {
+    -webkit-appearance: none; /* Remove default styling for date input */
+    color: #FFFFFF; /* White text inside the date input */
+    background-color: #222222; /* Same as other inputs */
+}
+
+.register-content-area input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.5); /* Invert colors to match dark background */
+}
+
 .register-content-area button {
     padding: 10px 20px;
     background-color: #FF1493; /* Neon Pink button */
@@ -54,9 +68,121 @@ body {
     cursor: pointer;
     box-shadow: 0 0 10px #FF1493; /* Neon glow on the button */
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+    margin: 20px auto; /* Center the button horizontally */
 }
 
 .register-content-area button:hover {
     background-color: #FF69B4; /* Lighter Neon Pink on hover */
     box-shadow: 0 0 15px #FF69B4; /* Stronger glow on hover */
 }
+
+/* Styling for the pill switch */
+.terms-acceptance p {
+    margin-bottom: 10px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.terms-acceptance a {
+    color: #FF1493;
+    text-decoration: underline;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-bottom: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #FF1493; /* Neon Pink circle */
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #39FF14; /* Neon Green when active */
+    box-shadow: 0 0 10px #39FF14;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Styling for profile picture upload */
+.upload-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.upload-container input[type="file"] {
+    display: none; /* Hide the default file input */
+}
+
+.upload-container label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FF1493; /* Neon Pink */
+    color: #FFFFFF;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #FF1493; /* Neon glow */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.upload-container label:hover {
+    background-color: #FF69B4; /* Lighter Neon Pink on hover */
+    box-shadow: 0 0 15px #FF69B4; /* Stronger glow on hover */
+}
+
+/* Display uploaded profile picture */
+.profile-picture-preview img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin-top: 20px;
+    box-shadow: 0 0 10px #FF1493; /* Neon glow around the image */
+}
+
+.alternative-signup {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .alternative-signup p {
+    color: #FFFFFF;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+  
+  .google-login-button {
+    margin-top: 0;
+    display: inline-block;
+  }
+  

@@ -7,7 +7,7 @@ const HomePage = () => {
     <div class="homepage-container">
       <div class="homepage-content-area">
           <section className="homepage-site-exploration">
-            <h2>Welcome to TingTongBingBong!</h2>
+            <h2>Welcome!</h2>
             <p>
               Visit the different pages in the top left to explore the site.
             </p>

@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+    background-color: #000000;
+}
+
+.profile-setup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('/public/images/neon_shapes_background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.profile-setup-content {
+    width: 50%;
+    background-color: #111111;
+    padding: 20px;
+    border: 5px solid #FF1493;
+    box-shadow: 0 0 15px #FF1493;
+    text-align: center;
+}
+
+.profile-setup-content h2 {
+    color: #FF1493;
+    text-shadow: 0 0 5px #FF1493, 0 0 10px #FF1493;
+    margin-bottom: 20px;
+}
+
+.profile-setup-container input[type="text"],
+.profile-setup-container input[type="date"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #222222;
+    border: 1px solid #FF1493;
+    color: #FFFFFF;
+    font-size: 16px;
+    box-shadow: 0 0 10px #FF1493;
+    outline: none;
+}
+
+.profile-setup-container button {
+    padding: 10px 20px;
+    background-color: #FF1493;
+    border: none;
+    color: #FFFFFF;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #FF1493;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin: 20px auto;
+}
+
+.profile-setup-container button:hover {
+    background-color: #FF69B4;
+    box-shadow: 0 0 15px #FF69B4;
+}
+
+/* Styling for the pill switch */
+.terms-acceptance {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.terms-acceptance p {
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.terms-acceptance a {
+    color: #FF1493;
+    text-decoration: underline;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-bottom: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #FF1493; /* Neon Pink circle */
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #39FF14; /* Neon Green when active */
+    box-shadow: 0 0 10px #39FF14;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Styling for the date input's calendar button */
+.profile-setup-container input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Make the calendar button white */
+    cursor: pointer;
+}

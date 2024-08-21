@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import './stylingfiles/LoginPage.css';
+import GoogleLogin from '../components/GoogleLogin'; // Import the new component
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -15,16 +16,6 @@ function Login() {
       console.log('User logged in:', userCredential.user);
     } catch (error) {
       console.error('Error logging in:', error.message);
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      console.log('User signed in with Google:', result.user);
-    } catch (error) {
-      console.error('Error during Google sign-in:', error.message);
     }
   };
 
@@ -57,14 +48,7 @@ function Login() {
           </Link>
         </div>
 
-        <div className="google-signin">
-          <img
-            src="/images/google-logo.png" /* Path to the Google logo in the public directory */
-            alt="Google Sign-In"
-            className="google-logo"
-            onClick={handleGoogleSignIn}
-          />
-        </div>
+        <GoogleLogin /> {/* Use the new GoogleLogin component */}
       </div>
     </div>
   );
