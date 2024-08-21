@@ -1,94 +1,100 @@
 /* General container for the note page */
 .published-content {
-    width: 100%; /* Fill the entire width of the page */
-    margin: 0;
-    padding: 20px 40px; /* Adjusted padding for better spacing */
-    background-color: #f9f9f9; /* Light background for content area */
-    font-family: Arial, sans-serif; /* Simple, readable font */
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
-  }
-  
-  /* Heading styles */
-  .published-content h1 {
-    font-size: 2em; /* Slightly smaller font size */
-    color: #333;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .published-content h2 {
-    font-size: 1.5em; /* Slightly smaller font size */
-    color: #555;
-    margin-top: 30px;
-    margin-bottom: 15px;
-  }
-  
-  /* Paragraph and text styles */
-  .published-content p {
-    font-size: 1em; /* Slightly smaller font size */
-    line-height: 1.6;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  /* Link styles */
-  .published-content a {
-    color: #0066cc;
-    text-decoration: none;
-  }
-  
-  .published-content a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Button styles */
-  .published-content button {
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #ffffff;
-    background-color: #333;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 20px;
-  }
-  
-  .published-content button:hover {
-    background-color: #555;
-  }
-  
-  /* Markdown content styling */
-  .published-content div {
-    font-size: 1em;
-    color: #444;
-  }
-  
-  /* List styles */
-  .published-content ul, .published-content ol {
-    padding-left: 40px;
-    margin-bottom: 20px;
-  }
-  
-  /* Code block styling */
-  .published-content pre {
-    background-color: #f5f5f5;
-    border-left: 3px solid #ccc;
-    padding: 10px;
-    overflow-x: auto;
-  }
-  
-  .published-content code {
-    background-color: #f4f4f4;
-    padding: 2px 4px;
-    border-radius: 3px;
-  }
-  
-  /* Image styles */
-  .published-content img {
-    max-width: 100%;
-    height: auto;
-    margin: 20px 0;
-  }
-  
+  width: 100%; /* Fill the entire width of the page */
+  min-height: 100vh; /* Ensure the content area covers at least the full viewport height */
+  margin: 0;
+  padding: 20px 40px; /* Adjusted padding for better spacing */
+  background-color: #f9f9f9; /* Light background for content area */
+  font-family: Arial, sans-serif; /* Simple, readable font */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Note title styling */
+.note-title {
+  font-size: 2.5em; /* Larger font size for more prominence */
+  color: #FF1493; /* A more vibrant neon color */
+  text-shadow: 0 0 5px #FF1493; /* Reduced shadow effect */
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 5px; /* Reduced margin-bottom */
+  font-weight: bold; /* Make the text bold for more emphasis */
+}
+
+
+/* Note info styles */
+.note-info {
+  font-size: 1em; /* Slightly larger font size */
+  color: #7f8c8d; /* Softer gray color */
+  margin-bottom: 10px; /* Ensure small space between note info and content */
+}
+
+/* Heading for published content */
+.published-content h2 {
+  font-size: 1.5em; /* Adjusted font size */
+  color: #555;
+  margin-top: 10px; /* Reduced margin-top */
+  margin-bottom: 10px; /* Reduced margin-bottom */
+}
+
+/* Paragraph and text styles */
+.published-content p {
+  font-size: 1em; /* Slightly smaller font size */
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+/* Markdown content styling */
+.published-content div {
+  font-size: 1em;
+  color: #444;
+  flex-grow: 1; /* Ensure the div grows to fill the remaining space */
+}
+
+/* List styles */
+.published-content ul, .published-content ol {
+  padding-left: 40px;
+  margin-bottom: 20px;
+}
+
+/* Code block styling */
+.published-content pre {
+  background-color: #f5f5f5;
+  border-left: 3px solid #ccc;
+  padding: 10px;
+  overflow-x: auto;
+}
+
+/* Image styles */
+.published-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
+
+/* Edit button styles */
+.edit-button-container {
+  display: flex;
+  justify-content: flex-end; /* Align the button to the right */
+  align-items: center; /* Center the button vertically */
+  margin-top: 20px;
+  padding: 10px 0;
+  flex-shrink: 0; /* Prevent the container from stretching */
+}
+
+.edit-button {
+  padding: 5px 10px;
+  font-size: 0.8em;
+  border: 1px solid #000;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #555;
+}

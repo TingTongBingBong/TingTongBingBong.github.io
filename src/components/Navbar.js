@@ -16,7 +16,8 @@ const Navbar = () => {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (userDoc.exists()) {
           const userData = userDoc.data();
-
+          console.log('User Data:', userData); // Add this line
+  
           // Check if terms are accepted, otherwise redirect to profile setup
           if (!userData.termsAccepted) {
             navigate('/profile-setup');
@@ -24,6 +25,7 @@ const Navbar = () => {
             setUser(user);
             setUsername(userData.username);
             setProfilePicture(userData.profilePicture);
+            console.log('Profile Picture:', userData.profilePicture); // Add this line
           }
         }
       } else {
@@ -32,7 +34,7 @@ const Navbar = () => {
         setProfilePicture('');
       }
     });
-
+  
     return () => unsubscribe();
   }, [navigate]);
 
@@ -52,12 +54,25 @@ const Navbar = () => {
     }
   };
 
+  const handleExternalLinkClick = (e, url) => {
+    e.preventDefault(); // Prevent the default link behavior
+    const userConfirmed = window.confirm('You are about to leave the TingTongBingBong site, do you wish to proceed?');
+    if (userConfirmed) {
+      window.open(url, '_blank');
+    }
+  };
+
   return (
     <nav className="navbar">
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/notes">Notes</Link></li>
         <li><Link to="/about">About</Link></li>
+        <li>
+          <a href="#" onClick={(e) => handleExternalLinkClick(e, 'https://discord.gg/nPWxDAwegx')}>
+            Discord
+          </a>
+        </li>
       </ul>
       <div className="navbar-logo">
         <Link to="/">

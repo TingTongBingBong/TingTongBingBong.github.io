@@ -1,36 +1,33 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { doc, setDoc, serverTimestamp, getDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { auth, db, storage } from '../firebaseConfig';
 import './stylingfiles/ProfileSetupPage.css';
 
 function ProfileSetupPage() {
-  const [fullName, setFullName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
   const [profilePictureFile, setProfilePictureFile] = useState(null);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
+  const [fileSelected, setFileSelected] = useState(false);
 
   const navigate = useNavigate();
 
   // Validation functions
-  const validateName = (name) => {
-    const nameRegex = /^[a-zA-Z\s]*$/;
-    return nameRegex.test(name);
-  };
-
-  const validateUsername = (username) => {
-    const usernameRegex = /^[a-zA-Z0-9_]+$/;
-    return usernameRegex.test(username);
-  };
+  const validateName = (name) => /^[a-zA-Z\s]{1,25}$/.test(name);
+  const validateUsername = (username) => /^[a-zA-Z0-9_]{1,25}$/.test(username);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
+    if (file && file.size <= 10 * 1024 * 1024) { // Check file size (10 MB)
       setProfilePictureFile(file);
+      setFileSelected(true);
+    } else {
+      alert('File size must be 10 MB or less.');
     }
   };
 
@@ -45,13 +42,13 @@ function ProfileSetupPage() {
       return;
     }
 
-    if (!validateName(fullName)) {
-      alert('Full name can only contain letters and spaces.');
+    if (!validateName(firstName) || !validateName(lastName)) {
+      alert('First name and last name must be 25 characters or less and can only contain letters.');
       return;
     }
 
     if (!validateUsername(username)) {
-      alert('Username can only contain letters, numbers, and underscores.');
+      alert('Username must be 25 characters or less and can only contain letters, numbers, and underscores.');
       return;
     }
 
@@ -78,15 +75,15 @@ function ProfileSetupPage() {
 
       if (profilePictureFile) {
         const storageRef = ref(storage, `profilePictures/${user.uid}`);
-        await uploadBytes(storageRef, profilePictureFile);
-        profilePictureURL = await getDownloadURL(storageRef);
+        const uploadTask = await uploadBytesResumable(storageRef, profilePictureFile);
+        profilePictureURL = await getDownloadURL(uploadTask.ref);
       }
 
       await setDoc(doc(db, 'users', user.uid), {
         email: user.email, // Store the user's email
-        fullName,
+        firstName,
+        lastName,
         username,
-        dateOfBirth,
         profilePicture: profilePictureURL,
         termsAccepted: true, // Ensure termsAccepted is true
         updatedAt: serverTimestamp(),
@@ -96,7 +93,7 @@ function ProfileSetupPage() {
       await setDoc(usernameDocRef, { used: true });
 
       setUploading(false);
-      navigate('/');
+      navigate('/#/');
     } catch (error) {
       console.error('Error saving user profile:', error.message);
       setUploading(false);
@@ -112,9 +109,18 @@ function ProfileSetupPage() {
         <form onSubmit={handleProfileSetup}>
           <input
             type="text"
-            placeholder="Full Name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            maxLength="25"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            maxLength="25"
             required
           />
           <input
@@ -122,17 +128,13 @@ function ProfileSetupPage() {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <input
-            type="date"
-            placeholder="Date of Birth"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
+            maxLength="25"
             required
           />
           <div className="upload-container">
-            <label htmlFor="profilePicture">Upload Profile Picture</label>
+            <label htmlFor="profilePicture">
+              {fileSelected ? "Profile Picture Selected" : "Upload Profile Picture"}
+            </label>
             <input
               type="file"
               id="profilePicture"

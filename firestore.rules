@@ -5,6 +5,7 @@ service cloud.firestore {
     match /usernameCheck/{username} {
       allow get: if true;  // Allows unauthenticated access to check if a username exists
       allow create: if request.auth != null && !exists(/databases/$(database)/documents/usernameCheck/$(username));
+      allow delete: if request.auth != null && request.auth.uid != null && resource.data.used == true;
     }
 
     // Users Collection: Users can only read and write their own data
@@ -14,7 +15,11 @@ service cloud.firestore {
 
     // Notes Collection: Only authenticated users can read or write notes
     match /notes/{noteId} {
-      allow read, write: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+                   (request.resource.data.users == resource.data.users ||
+                   request.resource.data.users == null || 
+                   request.auth.uid in resource.data.users);
     }
 
     // Events Collection: Only authenticated users can read or write events

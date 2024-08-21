@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, db, storage } from '../firebaseConfig';
-import { doc, getDoc, setDoc, serverTimestamp, query, collection, where, getDocs } from 'firebase/firestore';
+import { doc, getDoc, setDoc, serverTimestamp, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import './stylingfiles/ProfilePage.css';
 
@@ -65,13 +65,20 @@ const ProfilePage = () => {
 
     // Check if the username has changed and is unique
     if (username !== initialState.username) {
-      const q = query(collection(db, 'users'), where('username', '==', username));
-      const querySnapshot = await getDocs(q);
+      const usernameDocRef = doc(db, 'usernameCheck', username);
+      const usernameDoc = await getDoc(usernameDocRef);
 
-      if (!querySnapshot.empty) {
+      if (usernameDoc.exists()) {
         setError('Username already taken. Please choose another one.');
         return;
       }
+
+      // Save the new username in the usernameCheck collection
+      await setDoc(usernameDocRef, { used: true });
+
+      // Delete the old username from the usernameCheck collection
+      const oldUsernameDocRef = doc(db, 'usernameCheck', initialState.username);
+      await deleteDoc(oldUsernameDocRef);
     }
 
     try {

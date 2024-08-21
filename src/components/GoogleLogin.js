@@ -18,7 +18,8 @@ function GoogleLogin() {
       const userDocRef = doc(db, 'users', user.uid);
       const userDoc = await getDoc(userDocRef);
 
-      if (!userDoc.exists() || !userDoc.data().username || !userDoc.data().dateOfBirth) {
+      // Check for termsAccepted field to determine if profile is already set up
+      if (!userDoc.exists() || !userDoc.data().termsAccepted) {
         // If required fields are missing, redirect to the profile setup page
         navigate('/profile-setup');
       } else {
